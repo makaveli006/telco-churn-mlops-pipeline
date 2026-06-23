@@ -1,0 +1,8 @@
+services:
+  telco-churn:
+    build: .
+    image: telco-churn-app
+    container_name: telco-churn
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

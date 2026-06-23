@@ -44,8 +44,17 @@ mlflow ui --backend-store-uri file:./mlruns
 
 ### Docker
 ```bash
+# Using docker-compose.yml (recommended)
+docker compose up -d --build   # build + run
+docker compose down            # stop + remove
+
+# Using dockerfile directly
 docker build -t telco-churn-app .
-docker run -p 8000:8000 telco-churn-app
+docker rm -f telco-churn
+docker run -d -p 8000:8000 --name telco-churn telco-churn-app
+
+# Health check
+curl http://localhost:8000/
 ```
 
 ## Architecture

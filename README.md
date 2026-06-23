@@ -44,6 +44,13 @@ Build and ship a full machine-learning solution for predicting customer churn in
 - ALB health checks hit / on port 8000; once healthy, traffic is routed to the new task.
 - Users call POST /predict or open the Gradio UI at /ui via the ALB DNS.
 
+### Docker
+
+```bash
+docker compose up -d --build   # build + run
+docker compose down            # stop + remove
+```
+
 ### Roadblocks & how we solved them
 
 Unhealthy targets behind ALB
