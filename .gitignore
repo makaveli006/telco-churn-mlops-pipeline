@@ -52,6 +52,9 @@ mlruns/
 mlartifacts/
 mlflow.db
 
+# Big artifacts
+artifacts/
+
 # Model artifacts
 models/
 *.pkl
@@ -120,3 +123,7 @@ temp/
 *.tmp
 *.bak
 *.orig
+
+# Keep bundled serving model in the repo
+!src/serving/model/
+!src/serving/model/**
