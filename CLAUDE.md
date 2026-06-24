@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## AWS CLI Rules
+
+**CRITICAL: Only read/describe AWS CLI commands are allowed.**
+Never execute any AWS CLI command that creates, updates, or deletes resources (e.g. `create-cluster`, `register-task-definition`, `create-service`, `delete-*`, `update-*`, `run-task`, `put-*`).
+Only use commands like `describe-*`, `list-*`, `get-*` to read existing state.
+All AWS resource creation and changes must be done manually by the user via the AWS Console or confirmed explicitly before running.
+
 ## GitHub Rules
 
 For branching model and commit message conventions, see `C:\Users\subin\OneDrive\Desktop\Hiring-Espresso\.claude\rules\github-rules`
