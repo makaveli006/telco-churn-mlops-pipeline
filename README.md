@@ -37,6 +37,18 @@ Build and ship a full machine-learning solution for predicting customer churn in
 - Security: Security groups scoped to allow ALB inbound 80 from the internet, and task inbound 8000 from the ALB SG.
 - Observability: CloudWatch Logs for container stdout/stderr and ECS service events.
 
+### CI/CD to Production Flow
+
+```
+GitHub Runner → builds image → pushes to Docker Hub
+                                        ↓
+                              ECS pulls image from Docker Hub
+                                        ↓
+                              Fargate runs the container
+                                        ↓
+                              ALB routes traffic to it
+```
+
 ### Deployment flow (high-level)
 
 - Push to main → GitHub Actions builds the Docker image and pushes it to Docker Hub.
@@ -50,6 +62,24 @@ Build and ship a full machine-learning solution for predicting customer churn in
 docker compose up -d --build   # build + run
 docker compose down            # stop + remove
 ```
+
+### Local vs CI/CD Docker image naming
+
+Because they serve different purposes:
+
+Local (`telco-churn-app`):
+- Just a local name for testing on your machine
+- Not pushed anywhere
+- Name doesn't matter — only you see it
+
+CI/CD (`makaveli006/telco-fastapi:latest`):
+- Must follow Docker Hub naming format: `username/reponame:tag`
+- `makaveli006` = your Docker Hub username
+- `telco-fastapi` = the repo name on Docker Hub
+- `latest` = the tag
+- This is what ECS pulls when deploying
+
+Docker Hub won't accept a push without the `username/reponame` format — that's how it knows which account and repo to push to.
 
 ### Roadblocks & how we solved them
 

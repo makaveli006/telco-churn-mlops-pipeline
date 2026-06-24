@@ -87,6 +87,18 @@ Training and serving must apply identical transformations — this is the most c
 - `PYTHONPATH=/app/src` — required for `from serving.inference import ...` to resolve without `src.` prefix
 - uvicorn entrypoint: `src.app.main:app`
 
+### CI/CD to Production Flow
+
+```
+GitHub Runner → builds image → pushes to Docker Hub
+                                        ↓
+                              ECS pulls image from Docker Hub
+                                        ↓
+                              Fargate runs the container
+                                        ↓
+                              ALB routes traffic to it
+```
+
 ### CI/CD
 
 - Trigger: push to `main` only
